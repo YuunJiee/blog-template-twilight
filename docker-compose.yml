@@ -1,0 +1,25 @@
+services:
+  blog:
+    image: twilight-blog:latest
+    container_name: twilight-blog
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:3000:3000"
+    environment:
+      - NODE_ENV=production
+      - NEXT_TELEMETRY_DISABLED=1
+      # ── Public vars ──────────────────────────────────────────
+      - NEXT_PUBLIC_SITE_URL=${NEXT_PUBLIC_SITE_URL}
+      # ── Resend (contact form) ────────────────────────────────
+      - RESEND_API_KEY=${RESEND_API_KEY}
+      - CONTACT_RECIPIENT_EMAIL=${CONTACT_RECIPIENT_EMAIL}
+      - CONTACT_FROM_EMAIL=${CONTACT_FROM_EMAIL}
+    # Optional: mount .env file instead of listing each var above
+    # env_file:
+    #   - .env.production
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://127.0.0.1:3000/api/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s

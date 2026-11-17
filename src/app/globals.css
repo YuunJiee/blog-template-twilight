@@ -1,0 +1,309 @@
+/* Twilight & Nebula — 薄暮與星雲
+ * Soft lavender + nebula pink, rounded cards, light & dark mode.
+ * Every colour lives in the tokens below; change them to re-theme the site. */
+
+@import "tailwindcss";
+@import "tw-animate-css";
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-link: var(--link);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --color-code: var(--code-bg);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+}
+
+/* ── Light: 星雲 Nebula ─────────────────────────────── */
+:root {
+  --radius: 1rem;
+
+  --background: oklch(0.99 0.003 260);
+  --foreground: oklch(0.25 0.04 280);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.25 0.04 280);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.25 0.04 280);
+
+  /* 薄暮紫 — hero, active states, timeline dots */
+  --primary: oklch(0.6 0.08 275);
+  --primary-foreground: oklch(0.99 0.003 260);
+  --secondary: oklch(0.94 0.02 275);
+  --secondary-foreground: oklch(0.4 0.06 275);
+  --muted: oklch(0.97 0.01 270);
+  --muted-foreground: oklch(0.52 0.04 280);
+
+  /* 星雲粉 — decorative accent (borders, dots, hover bars) */
+  --accent: oklch(0.72 0.085 330);
+  --accent-foreground: oklch(1 0 0);
+  /* Darker pink for text, so links stay readable on white */
+  --link: oklch(0.52 0.12 330);
+
+  --destructive: oklch(0.6 0.2 20);
+  --border: oklch(0.92 0.02 275);
+  --input: oklch(0.92 0.02 275);
+  --ring: oklch(0.72 0.085 330);
+
+  --code-bg: oklch(0.24 0.03 280);
+  --hero-from: oklch(0.6 0.08 275);
+  --hero-to: oklch(0.77 0.07 330);
+}
+
+/* ── Dark: 薄暮 Twilight ────────────────────────────── */
+.dark {
+  --background: oklch(0.2 0.03 280);
+  --foreground: oklch(0.9 0.01 270);
+  --card: oklch(0.25 0.035 280);
+  --card-foreground: oklch(0.9 0.01 270);
+  --popover: oklch(0.25 0.035 280);
+  --popover-foreground: oklch(0.9 0.01 270);
+
+  --primary: oklch(0.72 0.07 285);
+  --primary-foreground: oklch(0.2 0.03 280);
+  --secondary: oklch(0.3 0.04 280);
+  --secondary-foreground: oklch(0.9 0.01 270);
+  --muted: oklch(0.28 0.03 280);
+  --muted-foreground: oklch(0.7 0.02 270);
+
+  --accent: oklch(0.8 0.06 330);
+  --accent-foreground: oklch(0.25 0.05 330);
+  --link: oklch(0.82 0.07 330);
+
+  --destructive: oklch(0.7 0.15 35);
+  --border: oklch(0.32 0.04 280);
+  --input: oklch(0.32 0.04 280);
+  --ring: oklch(0.8 0.06 330);
+
+  --code-bg: oklch(0.16 0.025 280);
+  --hero-from: oklch(0.35 0.08 285);
+  --hero-to: oklch(0.25 0.04 330);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 5rem;
+  }
+
+  html,
+  body {
+    background-color: var(--background);
+    color: var(--foreground);
+    font-size: 15px;
+    font-family: var(--font-inter), var(--font-noto-sans-tc), sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  ::selection {
+    background-color: var(--accent);
+    color: var(--accent-foreground);
+  }
+
+  ::-webkit-scrollbar { width: 10px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb {
+    background: var(--muted-foreground);
+    border-radius: 5px;
+    border: 2px solid var(--background);
+  }
+  ::-webkit-scrollbar-thumb:hover { background: var(--accent); }
+}
+
+/* ── Hero gradient (slowly drifting aurora) ───────────── */
+@keyframes aurora {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.hero-gradient {
+  background-size: 200% 200%;
+  background-image: linear-gradient(to bottom right, var(--hero-from), var(--hero-to));
+  animation: aurora 15s ease-in-out infinite alternate;
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.fade-in-up { animation: fadeInUp 0.6s ease-out both; }
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-gradient, .fade-in-up { animation: none; }
+  html { scroll-behavior: auto; }
+}
+
+/* ── Article typography ───────────────────────────────── */
+@layer components {
+  .manual-prose {
+    font-size: 1.05rem;
+    line-height: 1.85;
+    color: color-mix(in oklch, var(--foreground) 85%, transparent);
+  }
+
+  .manual-prose h1,
+  .manual-prose h2,
+  .manual-prose h3,
+  .manual-prose h4 {
+    @apply font-bold text-foreground mb-4 mt-10 scroll-mt-24 leading-snug;
+  }
+  .manual-prose h1 { @apply text-3xl; }
+  .manual-prose h2 {
+    @apply text-2xl;
+    color: var(--link);
+  }
+  .manual-prose h3 { @apply text-xl; }
+  .manual-prose h4 { @apply text-lg; }
+
+  .manual-prose p { @apply my-5; }
+  .manual-prose ul { @apply list-disc my-5 ml-6; }
+  .manual-prose ol { @apply list-decimal my-5 ml-6; }
+  .manual-prose li { @apply my-1.5; }
+  .manual-prose li > input[type="checkbox"] { @apply mr-2 accent-primary; }
+  .manual-prose ul:has(> li > input[type="checkbox"]) { @apply list-none ml-1; }
+
+  .manual-prose a {
+    color: var(--link);
+    @apply underline decoration-1 underline-offset-4 decoration-accent/50 hover:decoration-2;
+  }
+  /* Heading anchors (rehype-autolink-headings) keep the heading's look */
+  .manual-prose :is(h1, h2, h3, h4) a { color: inherit; text-decoration: none; }
+  .manual-prose strong { @apply font-bold text-foreground; }
+
+  .manual-prose :not(pre) > code {
+    @apply font-mono text-[0.88em] bg-secondary text-secondary-foreground rounded-md px-1.5 py-0.5;
+  }
+
+  .manual-prose pre {
+    @apply bg-code text-[#e6e6f0] px-4 pt-8 pb-4 rounded-xl overflow-x-auto my-6 text-sm leading-relaxed shadow-sm;
+  }
+  .manual-prose pre code { @apply bg-transparent p-0 font-mono; }
+
+  /* Code block line numbers */
+  .manual-prose pre > code {
+    counter-reset: code-line;
+    display: block;
+  }
+  .manual-prose pre > code .code-line {
+    counter-increment: code-line;
+    display: block;
+    padding-left: 3.25em;
+    position: relative;
+    min-height: 1.4em;
+  }
+  .manual-prose pre > code .code-line::before {
+    content: counter(code-line);
+    position: absolute;
+    left: 0;
+    width: 2.25em;
+    text-align: right;
+    color: oklch(0.55 0.03 280);
+    font-size: 0.85em;
+    user-select: none;
+    pointer-events: none;
+    padding-right: 0.75em;
+  }
+
+  .manual-prose table { @apply w-full border-collapse text-sm; }
+  .manual-prose th { @apply border-b-2 border-border px-4 py-2.5 text-left font-bold text-foreground; }
+  .manual-prose td { @apply border-b border-border px-4 py-2.5; }
+  .manual-prose tbody tr:hover { @apply bg-muted; }
+
+  .manual-prose blockquote {
+    @apply border-l-4 border-accent pl-4 pr-4 py-2 my-6 italic text-muted-foreground bg-muted rounded-r-lg;
+  }
+
+  .manual-prose img {
+    @apply mx-auto block max-w-full h-auto rounded-lg;
+  }
+
+  /* Figure caption: an image followed by an italic-only line */
+  .manual-prose p > img + em,
+  .manual-prose p > img + br + em,
+  .manual-prose p:has(> img) + p > em:only-child {
+    @apply block text-sm text-muted-foreground mt-2 not-italic text-center;
+  }
+
+  .manual-prose hr { @apply my-10 border-border; }
+
+  /* GFM footnotes */
+  .manual-prose .footnotes {
+    @apply mt-12 pt-6 border-t border-border text-sm text-muted-foreground;
+  }
+  .manual-prose .footnotes h2 { @apply text-base mt-0 text-muted-foreground; }
+  .manual-prose sup a { @apply no-underline; }
+
+  /* Callouts: > [!NOTE] / [!TIP] / [!WARNING] / [!IMPORTANT] / [!CAUTION] */
+  .callout {
+    --c: var(--primary);
+    @apply my-6 rounded-xl border-l-4 px-5 py-4;
+    border-color: var(--c);
+    background: color-mix(in oklch, var(--c) 9%, transparent);
+  }
+  .callout > :last-child { margin-bottom: 0; }
+  .callout > p { margin: 0.25rem 0; }
+  .callout-title {
+    @apply text-sm font-bold mb-1;
+    color: var(--c);
+  }
+  .callout-note      { --c: var(--primary); }
+  .callout-tip       { --c: oklch(0.62 0.12 160); }
+  .callout-warning   { --c: oklch(0.72 0.14 75); }
+  .callout-important { --c: var(--link); }
+  .callout-caution   { --c: oklch(0.6 0.18 20); }
+}
+
+/* highlight.js ships unlayered CSS that would win over @layer rules,
+   so this override must stay outside any layer. */
+.manual-prose pre code.hljs {
+  background: transparent;
+  padding: 0;
+  overflow: visible;
+}
+
+/* ── Mobile ──────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .manual-prose { font-size: 1rem; line-height: 1.8; }
+  .manual-prose h1 { @apply text-2xl; }
+  .manual-prose h2 { @apply text-xl; }
+  .manual-prose h3 { @apply text-lg; }
+  .manual-prose table { display: block; overflow-x: auto; }
+}
+
+/* ── KaTeX ───────────────────────────────────────────── */
+.katex {
+  line-height: 1.6 !important;
+  font-size: 1.1em !important;
+}
+.katex .text {
+  font-family: var(--font-noto-sans-tc), sans-serif !important;
+}
+.katex-display {
+  margin: 1.5em 0 !important;
+  overflow-x: auto !important;
+  overflow-y: hidden !important;
+}

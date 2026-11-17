@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 180" font-family="ui-monospace, monospace" font-size="15">
+  <g fill="none" stroke-width="2">
+    <rect x="30" y="60" width="160" height="60" rx="14" stroke="#7f78c0"/>
+    <rect x="240" y="60" width="160" height="60" rx="14" stroke="#a98cc6"/>
+    <rect x="450" y="60" width="160" height="60" rx="14" stroke="#cf8fb9"/>
+  </g>
+  <g stroke="#9a94b8" stroke-width="2"><line x1="190" y1="90" x2="232" y2="90"/><line x1="400" y1="90" x2="442" y2="90"/></g>
+  <g fill="#9a94b8"><polygon points="240,90 230,84 230,96"/><polygon points="450,90 440,84 440,96"/></g>
+  <g text-anchor="middle" fill="#8a84b4"><text x="110" y="95">_posts/*.md</text><text x="320" y="95">remark/rehype</text><text x="530" y="95">/blog/[id]</text></g>
+</svg>

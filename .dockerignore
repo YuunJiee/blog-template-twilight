@@ -1,0 +1,39 @@
+# Version control
+.git
+.gitignore
+
+# Node modules (installed fresh inside container)
+node_modules
+
+# Next.js build output (rebuilt inside container)
+.next
+out
+
+# Environment files — never copy secrets into the image!
+.env
+.env.*
+!.env.example
+
+# Editor & OS
+.DS_Store
+*.pem
+.vscode
+.idea
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Jupyter notebooks (large)
+*.ipynb
+
+# TypeScript build info
+*.tsbuildinfo
+
+# CI / deployment docs
+.github
+README.md
+ARCHITECTURE.md
+INTERVIEW_PREP.md
+_drafts
